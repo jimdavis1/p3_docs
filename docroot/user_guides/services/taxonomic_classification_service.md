@@ -1,7 +1,7 @@
 # Taxonomic Classification Service
 
 ## Overview
-The Taxonomic Classification Service accepts reads or contigs from sequencing of a metagenomic sample and uses [Kraken 2](http://genomebiology.com/2014/15/3/R46) to assign the reads to taxonomic bins, providing an initial profile of the possible constituent organisms present in the sample.
+The Taxonomic Classification Service accepts reads or contigs and assigns them to taxonomic bins using the [Kraken 2](http://genomebiology.com/2014/15/3/R46) algorithm. The output provides an initial profile of the possible constituent organisms present in the sample.
 
 ### See also
   * [Taxonomic Classification Service](https://patricbrc.org/app/TaxonomicClassification)
@@ -17,7 +17,7 @@ The **Taxonomic Classification** submenu option under the **Services** main menu
 ![Taxonomic Classification Input Form](../images/taxonomic_classification_input_form.png)
 
 ## Start With
-The service can accept either read files or assembled contigs. If the "Read File" option is selected, the form will provide controls to allow input of read files or SRA accession numbers.  If the "Assembled Contigs" option is selected, the form will change to allow input of a contig file.   
+The service can accept either read files or assembled contigs. If the "Read File" option is selected, the form will provide controls to allow input of read files or SRA accession numbers.  If the "Assembled Contigs" option is selected, the form will change to allow input of a contig file.  It should work with reads from any sequencing platform. 
 
 ## Input File
 Depending on the option chosen above (Read File or Assembled Contigs), the Input File section will request read files or assembled contigs, respectively.
@@ -38,14 +38,14 @@ Read files placed here will contribute to a single assembly.
 
 ### Algorithm
 
- * [Kraken 2](http://genomebiology.com/2014/15/3/R46) - Assigns taxonomic labels to metagenomic DNA sequences using exact alignmnet of k-mers.
+ * [Kraken 2](http://genomebiology.com/2014/15/3/R46) - Assigns taxonomic labels to metagenomic DNA sequences using a k-mer database.
 
 ### Database
-Reference taxonomic database used by the algorithm.
+We currently provide three KRAKEN databases built from the follwoing sources:
 
-* [Kraken 2](https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual#standard-kraken-2-database) - Standard Kraken 2 database containing distinct 31-mers, based on completed microbial genomes from NCBI.
-* [RDP](https://doi.org/10.1128/AEM.00062-07) - The Ribosomal Database Project (RDP), a naïve Bayesian-based classification for bacterial 16S rRNA sequences.
-* [SILVA](https://doi.org/10.1093/nar/gkt1209) - Comprehensive database of aligned ribosomal RNA (rRNA) gene sequences from the Bacteria, Archaea and Eukaryota domains and supplementary online services. 
+* [All Genomes](https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual#standard-kraken-2-database) - This is a standard  Kraken 2 database built from the genomes in RefSeq.  It includes Bacteria, Archaea, Eukarya, viruses, and cloning vectors. 
+* [RDP](https://doi.org/10.1128/AEM.00062-07) - This is a Kraken 2 database built from the small subunit ribosomal RNA collection from the Ribosomal Database Project (RDP).
+* [SILVA](https://doi.org/10.1093/nar/gkt1209) - This is a Kraken 2 database built from the small subunit ribosomal RNA collection from SILVA. 
 
 ### Output Folder
 The workspace folder where results will be placed.
@@ -56,7 +56,7 @@ Name used to uniquely identify results.
 ## Output Results
 ![Taxonomic Classification Output Files](../images/taxonomic_classification_output_files_v2.png)
 
-The Taxonomic Classification Service generates several files that are deposited in the Private Workspace in the designated Output Folder. To reivThese include
+The Taxonomic Classification Service generates several files that are deposited in the Private Workspace in the designated Output Folder. These include:
 
  * **TaxonomicReport.html** - A web-browser-viewable report that summarizes the results of the service including
    * Input Data - read files used
